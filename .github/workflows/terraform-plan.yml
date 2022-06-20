@@ -5,6 +5,11 @@ on:
     branches:
     - "plan"
     workflow_dispatch:
+  pull_requests:
+    branches:
+      - "main"
+    workflow_dispatch:
+
 
 
 jobs:
