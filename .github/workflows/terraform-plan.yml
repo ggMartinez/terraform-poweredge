@@ -31,12 +31,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Export variables
+      - name: Install gettext and create Backend config file
         run: |
-          export TF_VAR_consul_address=$CONSUL_ADDRESS
-          export TF_VAR_consul_path=$CONSUL_PATH
+          apk add gettext
+          cat backend.tf.example | envsubst | tee backend.tf
       - name: Init Terraform plugins 
-        run: terraform init
+        run: terraform init -
       - name: Validate terraform files
         run: terraform validate
       - name: Show terraform Plan

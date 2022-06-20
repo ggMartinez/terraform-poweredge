@@ -4,12 +4,10 @@ terraform {
 }
 
 provider "consul" {
-    address = var.consul_address
+    address = "${CONSUL_ADDRESS}"
     scheme   = "http"
-    path     = var.consul_path
+    path     = "${CONSUL_PATH}"
     lock     = true
     gzip     = false
 }
 
-variable "consul_address" {}
-variable "consul_path" {}
