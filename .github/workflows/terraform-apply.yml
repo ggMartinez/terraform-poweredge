@@ -46,6 +46,9 @@ jobs:
         run: terraform validate
       - name: Apply terraform files
         run: terraform apply -auto-approve
-      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: key
+          path: /root/.ssh
       
       
