@@ -23,11 +23,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Display env variables
-        run: |
-          echo $TF_VAR_proxmoxUrl
-          echo $TF_VAR_proxmoxToken
-          echo $TF_VAR_proxmoxSecret
       - name: Terraform Init 
         run: terraform init
       - name: Terraform Plan 

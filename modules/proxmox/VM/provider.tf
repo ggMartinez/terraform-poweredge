@@ -13,3 +13,7 @@ provider "proxmox" {
   pm_api_token_secret = var.proxmoxSecret
   pm_tls_insecure = true
 }
+
+variable "proxmoxUrl" {}
+variable "proxmoxToken" {}
+variable "proxmoxSecret" {}
