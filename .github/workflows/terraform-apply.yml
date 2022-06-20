@@ -1,14 +1,21 @@
 name: 'Terraform Apply'
 
 on:
-  pull_request:
-    types: [closed]
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  PM_API_URL: https://192.168.1.4:8006/api2/json
+  PM_API_TOKEN_ID: root@pam!terraform
+  PM_API_TOKEN_SECRET: ${{ secrets.PM_TOKEN }}
+  PM_TLS_INSECURE: true
 
 
 jobs:
   TerraformApply:
     runs-on: [self-hosted]
+    environment: production
     container:
       image: hashicorp/terraform
     steps:
