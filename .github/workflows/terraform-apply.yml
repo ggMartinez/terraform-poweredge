@@ -1,4 +1,4 @@
-name: 'TerraformApply'
+name: 'Terraform Apply'
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  Terraform Apply:
+  TerraformApply:
     runs-on: [self-hosted]
     container:
       image: hashicorp/terraform
