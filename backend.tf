@@ -1,7 +1,7 @@
 
 terraform {
   backend "consul" {
-    address  = "192.168.1.4:8500"
+    address  = var.consulUrl
     scheme   = "http"
     path     = "terraform/terraform.tfstate"
     lock     = true
