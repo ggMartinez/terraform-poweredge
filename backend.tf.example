@@ -1,13 +1,9 @@
-
 terraform {
-  backend "consul" {}
-}
-
-provider "consul" {
-    address = "${CONSUL_ADDRESS}"
+  backend "consul" {
+    address  = "${CONSUL_ADDRESS}"
     scheme   = "http"
     path     = "${CONSUL_PATH}"
     lock     = true
     gzip     = false
+  }
 }
-
