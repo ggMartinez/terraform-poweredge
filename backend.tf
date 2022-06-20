@@ -1,9 +1,12 @@
 
 terraform {
-  backend "consul" {
+  backend "consul" {}
+}
+
+provider "consul" {
+    address = var.consul_address
     scheme   = "http"
-    path     = "terraform/terraform.tfstate"
+    path     = var.consul_path
     lock     = true
     gzip     = false
-  }
 }
