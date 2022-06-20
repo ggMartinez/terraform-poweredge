@@ -12,6 +12,12 @@ resource "null_resource" "user-data"{
   }
 }
 
+resource "proxmox_virtual_environment_pool" "operations_pool" {
+  comment = "Managed by Terraform"
+  pool_id = var.pool ? var.pool : var.name 
+}
+
+
 resource "proxmox_vm_qemu" "proxmox-vm" {
   count = var.vmCount
   name = "${var.name}-${count.index + 1}" 
@@ -19,6 +25,7 @@ resource "proxmox_vm_qemu" "proxmox-vm" {
   target_node = var.proxmoxHost
   clone = var.templateName
   agent = 1
+  pool = proxmox_virtual_environment_pool.operations_pool.pool_id
   os_type = "cloud-init"
   cores = var.cpuCores
   sockets = var.cpuSockets
