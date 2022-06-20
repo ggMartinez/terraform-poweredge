@@ -10,6 +10,7 @@ env:
   PM_API_TOKEN_ID: root@pam!terraform
   PM_API_TOKEN_SECRET: ${{ secrets.PM_TOKEN }}
   PM_TLS_INSECURE: true
+  SSH_KEY: ${{ secrets.SSH_KEY }}
 
 
 jobs:
@@ -21,6 +22,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Install SSH Client (For provisioning)
+        run: apk add openssh
+      - name: Install SSH Key
+        run: |
+          mkdir -p /root/.ssh
+          chown root /root/.ssh
+          echo $SSH_KEY > /root/.ssh/id_rsa
+          chmod 600 /root/.ssh/id_rsa 
       - name: Init Terraform plugins 
         run: terraform init
       - name: Validate terraform files
