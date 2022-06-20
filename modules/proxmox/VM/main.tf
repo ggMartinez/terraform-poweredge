@@ -14,7 +14,7 @@ resource "null_resource" "user-data"{
 
 resource "proxmox_virtual_environment_pool" "operations_pool" {
   comment = "Managed by Terraform"
-  pool_id = var.pool ? var.pool : var.name 
+  pool_id = var.pool != "" ? var.pool : var.name 
   provider = proxmox-pools
 }
 
