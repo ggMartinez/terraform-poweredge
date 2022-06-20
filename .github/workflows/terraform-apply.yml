@@ -21,9 +21,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Terraform Init
+      - name: Init Terraform plugins 
         run: terraform init
-      - name: Terraform Apply
+      - name: Validate terraform files
+        run: terraform validate
+      - name: Apply terraform files
         run: terraform apply -auto-approve
       
       
