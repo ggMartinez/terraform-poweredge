@@ -32,7 +32,7 @@ resource "proxmox_vm_qemu" "proxmox-vm" {
     slot = 0
     size = var.diskSize
     type = "scsi"
-    storage = "local-zfs"
+    storage = "local-lvm"
     iothread = 1
   }
   network {
