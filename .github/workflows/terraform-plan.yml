@@ -19,8 +19,6 @@ env:
 jobs:
   TerraformPlan:
     runs-on: [self-hosted]
-    environment: production
-
     container:
       image: hashicorp/terraform
     steps:
