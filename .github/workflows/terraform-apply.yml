@@ -24,12 +24,16 @@ jobs:
     runs-on: [self-hosted]
     environment: production
     container:
-      image: hashicorp/terraform
+      image: centos:7
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Install SSH Client (For provisioning)
-        run: apk add openssh
+      - name: Install Packages
+        run: yum install -y openssh wget gettext unzip 
+      - name: Install Terraform
+        run: |
+          wget  -o
+          unzip 
       - name: Install SSH Key
         run: |
           mkdir -p /root/.ssh

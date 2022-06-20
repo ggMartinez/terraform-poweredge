@@ -11,9 +11,10 @@ on:
     workflow_dispatch:
 
 env:
+  TERRAFORM_DOWNLOAD_URL: https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
+  TERRAFORM_SSH_KEY: ${{ secrets.SSH_KEY }}
   CONSUL_ADDRESS: 192.168.1.4:8500
   CONSUL_PATH: terraform/terraform.tfstate
-  TERRAFORM_DOWNLOAD_URL: https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
   PM_API_URL: https://192.168.1.4:8006/api2/json
   PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
@@ -22,7 +23,7 @@ env:
   PROXMOX_VE_PASSWORD: ${{ secrets.PM_PASS }}
   PROXMOX_VE_ENDPOINT: https://192.168.1.4:8006/
   PROXMOX_VE_INSECURE: 1
-  SSH_KEY: ${{ secrets.SSH_KEY }}
+  
 
 jobs:
   TerraformPlan:
@@ -44,12 +45,10 @@ jobs:
         run: |
           mkdir -p /root/.ssh
           chown root /root/.ssh
-          echo $SSH_KEY | base64 -d > /root/.ssh/id_rsa
+          echo $TERRAFORM_SSH_KEY | base64 -d > /root/.ssh/id_rsa
           chmod 600 /root/.ssh/id_rsa 
       - name: Create Consul Backend config
-        run: |
-          apk add gettext
-          cat backend.tf.example | envsubst | tee backend.tf
+        run:  cat backend.tf.example | envsubst | tee backend.tf
       - name: Init Terraform plugins 
         run: terraform init
       - name: Validate terraform files
