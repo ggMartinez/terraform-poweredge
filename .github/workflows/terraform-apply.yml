@@ -9,7 +9,8 @@ on:
 jobs:
   Terraform Apply:
     runs-on: [self-hosted]
-    container: { hashicorp/terraform } 
+    container:
+      image: hashicorp/terraform
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
