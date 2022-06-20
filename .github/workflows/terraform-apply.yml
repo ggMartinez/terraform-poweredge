@@ -9,7 +9,7 @@ env:
   TERRAFORM_DOWNLOAD_URL: https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
   TERRAFORM_SSH_KEY: ${{ secrets.SSH_KEY }}
   CONSUL_ADDRESS: 192.168.1.4:8500
-  CONSUL_PATH: terraform/tform.tfstate
+  CONSUL_PATH: state/terraform.tfstate
   PM_API_URL: https://192.168.1.4:8006/api2/json
   PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Install Packages
-        run: yum install -y openssh wget gettext unzip 
+        run: yum install -y openssh-clients wget gettext unzip 
       - name: Install Terraform
         run: |
           wget $TERRAFORM_DOWNLOAD_URL -O terraform.zip
