@@ -1,3 +1,7 @@
+module "proxmox-provider" {
+    source = "../provider"
+}
+
 resource "proxmox_vm_qemu" "proxmox-vm" {
   count = var.vmCount
   name = "${var.name}-${count.index + 1}" 
