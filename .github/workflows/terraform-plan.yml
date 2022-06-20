@@ -13,6 +13,7 @@ on:
 env:
   CONSUL_ADDRESS: 192.168.1.4:8500
   CONSUL_PATH: terraform/terraform.tfstate
+  TERRAFORM_DOWNLOAD_URL: https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
   PM_API_URL: https://192.168.1.4:8006/api2/json
   PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
@@ -27,11 +28,25 @@ jobs:
   TerraformPlan:
     runs-on: [self-hosted]
     container:
-      image: hashicorp/terraform
+      image: centos:7
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Install gettext and create Backend config file
+      - name: Install Packages
+        run: yum install -y openssh wget gettext unzip 
+      - name: Install Terraform
+        run: |
+          wget $TERRAFORM_DOWNLOAD_URL -O terraform.zip
+          unzip terraform.zip
+          mv terraform /bin
+          chmod +x /bin/terraform
+      - name: Install SSH Key
+        run: |
+          mkdir -p /root/.ssh
+          chown root /root/.ssh
+          echo $SSH_KEY | base64 -d > /root/.ssh/id_rsa
+          chmod 600 /root/.ssh/id_rsa 
+      - name: Create Consul Backend config
         run: |
           apk add gettext
           cat backend.tf.example | envsubst | tee backend.tf

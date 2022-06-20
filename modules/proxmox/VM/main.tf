@@ -53,7 +53,7 @@ resource "proxmox_vm_qemu" "proxmox-vm" {
   
 ipconfig0 = var.networkDhcp ? "ip=dhcp" : var.vmCount == 1 ? "ip=${var.networkIp}/24,gw=${var.networkGateway}" : "ip=${var.networkIp}${count.index + 1}/24,gw=${var.networkGateway}"  
 sshkeys = <<EOF
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJst1pz+r/BPcE/pDDst6tYaHhn0U5eV0k66szHVoUQpz053SI1zjobPhU05P0dR3kI/KBub2jPKrDypHgq9UDYkKYMQgxhgrcNZB4TSXIVo/0qi0J92i5g/wP/qSxuIaFwEdz+oeKRYRZlP2bO2DnROd6uppXt0g/29q7QvJZBlDDHxQT+tIWFnOcuVfcKGjcrkHXDn4SuLaggLimHzxGsYDra5VPfpdfWtINV1BPzllu67dEbQfzsaqCgcJRnRbkpDp2PkLlkf21mbRVXY5toG7Bg2RSHDT4rryMep1/x2+HSVe+vek7DxQxSzxLLnfFYfeDQl47Hqtxu9Hq90XTv76tE8QmVl1wsDtPS8MiTUosZQ3d7FKnwusrm/UJgvy6uZEOYoMp19y9aYHopbcB+YMbw9zaD31ChKdCXNnKF4hxMUbXz0hy4MhQ77RFffGu1nNgbEQxkNpcTNAUmh81WdToWlBFDSRzeHH3kHhkjSe/gQC2fWmkoM9TlVKL9UE= root@prosmos
-  ${var.sshKey}
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbTYTzsMPPMuACn+CLkXTMjneeB3nHgV7s0REQ6EtR9Qta8mQpRRU6AHaM3OARr5XIRrvzy5uqMUaVrmuO/5cLEKItMf4b4q3+nL9+uXp+qO14wmBAM55vrarxhFXLiRJLwkh+7Wb8ix8O3mNKFyv1zjPp7Bv9h3H4zVdARgWuTQ5VHf9SkH9OMjA7nGVZCHYAksKlTZVTJGG1V+fT1OjygxGx14NyrTUDnQUHOR6WHyiI+FdgTLQw2utnBCflY0tmascYtbS/+sJoQHwk2j8qHmGkx+yaJZieHnjwvoO1JQQ8Gc46PIOfCRjkrn80DvLV6JiDjR7k6EiPju8V9CSeh6RJVw8SDmIwXqQwpip/00avTB6Ny3pZLFV+MdhweqFK3eDgZc4lD4U29ZO8h2XifzhPATRtfF/8uaYfE4/2TOElp/O5MO6ONsBROxw2isP5f1g4H3ifTNvTp0muC0gewhQNGodE8GzctAhf3We5Y49OMnhrxLMRF/TK3GTZS10= root@prosmos
+${var.sshKey}
   EOF
 }
