@@ -5,16 +5,23 @@ on:
     branches:
     - "plan"
     workflow_dispatch:
+  pull_request:
+    branches:
+      - "main"
+    workflow_dispatch:
+
 
 
 jobs:
-  Terraform Plan:
+  TerraformPlan:
     runs-on: [self-hosted]
-    container: { hashicorp/terraform } 
+    container:
+      image: hashicorp/terraform
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Terraform Plan
-        run: |
-          terraform init
-          terraform plan
+      - name: Terraform Init 
+        run: terraform init
+      - name: Terraform Plan 
+        run: terraform plan
+      
