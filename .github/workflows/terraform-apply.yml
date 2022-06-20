@@ -1,0 +1,22 @@
+name: 'Terraform Apply'
+
+on:
+  pull_request:
+    types: [closed]
+    workflow_dispatch:
+
+
+jobs:
+  Terraform Apply:
+    runs-on: [self-hosted]
+    container: { hashicorp/terraform } 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Terraform Plan
+        run: |
+          terraform init
+          terraform apply -auto-approve
+      
+      
+      
