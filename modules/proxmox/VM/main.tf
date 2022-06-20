@@ -3,7 +3,6 @@ resource "null_resource" "user-data"{
   connection {
     type        = "ssh"
     user        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_user
-    private_key = "${file("~/.ssh/terraform")}"
     host        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_host
     port        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_port
   }
