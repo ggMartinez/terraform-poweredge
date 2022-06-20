@@ -29,8 +29,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: echo 
-        run: echo $SSH_KEY |base64
       - name: Init Terraform plugins 
         run: terraform init
       - name: Validate terraform files
