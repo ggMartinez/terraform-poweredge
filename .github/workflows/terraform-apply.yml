@@ -6,8 +6,10 @@ on:
       - main
 
 env:
-  TF_VAR_consul_address: 192.168.1.4:8500
-  TF_VAR_consul_path: terraform/terraform.tfstate
+  TERRAFORM_DOWNLOAD_URL: https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
+  TERRAFORM_SSH_KEY: ${{ secrets.SSH_KEY }}
+  CONSUL_ADDRESS: 192.168.1.4:8500
+  CONSUL_PATH: terraform/terraform.tfstate
   PM_API_URL: https://192.168.1.4:8006/api2/json
   PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
@@ -16,13 +18,11 @@ env:
   PROXMOX_VE_PASSWORD: ${{ secrets.PM_PASS }}
   PROXMOX_VE_ENDPOINT: https://192.168.1.4:8006/
   PROXMOX_VE_INSECURE: 1
-  SSH_KEY: ${{ secrets.SSH_KEY }}
-
+  
 
 jobs:
   TerraformApply:
     runs-on: [self-hosted]
-    environment: production
     container:
       image: centos:7
     steps:
@@ -32,14 +32,18 @@ jobs:
         run: yum install -y openssh wget gettext unzip 
       - name: Install Terraform
         run: |
-          wget  -o
-          unzip 
+          wget $TERRAFORM_DOWNLOAD_URL -O terraform.zip
+          unzip terraform.zip
+          mv terraform /bin
+          chmod +x /bin/terraform
       - name: Install SSH Key
         run: |
           mkdir -p /root/.ssh
           chown root /root/.ssh
-          echo $SSH_KEY | base64 -d > /root/.ssh/id_rsa
+          echo $TERRAFORM_SSH_KEY | base64 -d > /root/.ssh/id_rsa
           chmod 600 /root/.ssh/id_rsa 
+      - name: Create Consul Backend config
+        run:  cat backend.tf.example | envsubst | tee backend.tf
       - name: Init Terraform plugins 
         run: terraform init
       - name: Validate terraform files
