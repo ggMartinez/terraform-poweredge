@@ -12,12 +12,10 @@ on:
 
 env:
   PM_API_URL: https://192.168.1.4:8006/api2/json
-  PM_API_TOKEN_ID: root@pam!terraform
-  PM_API_TOKEN_SECRET: ${{ secrets.PM_TOKEN }}
-  PM_USER: root 
+  PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
   PM_TLS_INSECURE: true
-  PROXMOX_VE_USERNAME: root
+  PROXMOX_VE_USERNAME: root@pam
   PROXMOX_VE_PASSWORD: ${{ secrets.PM_PASS }}
   PROXMOX_VE_ENDPOINT: https://192.168.1.4:8006/api2/json
   PROXMOX_VE_INSECURE: true
