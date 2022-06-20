@@ -12,14 +12,13 @@ jobs:
   Terraform:
     runs-on: [self-hosted]
     steps:
-      - uses: actions/checkout@v2
-        name: Terraform Plan
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Terraform Plan
         run: |
           terraform init
           terraform plan
-
-      - uses: actions/checkout@v2
-        name: Terraform Apply
+      - name: Terraform Apply
         run: |
           terraform init
           terraform apply -auto-aprove
