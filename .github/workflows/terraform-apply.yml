@@ -7,9 +7,14 @@ on:
 
 env:
   PM_API_URL: https://192.168.1.4:8006/api2/json
-  PM_API_TOKEN_ID: root@pam!terraform
-  PM_API_TOKEN_SECRET: ${{ secrets.PM_TOKEN }}
+  PM_USER: root@pam 
+  PM_PASS: ${{ secrets.PM_PASS }}
   PM_TLS_INSECURE: true
+  PROXMOX_VE_USERNAME: root@pam
+  PROXMOX_VE_PASSWORD: ${{ secrets.PM_PASS }}
+  PROXMOX_VE_ENDPOINT: https://192.168.1.4:8006/
+  PROXMOX_VE_INSECURE: 1
+  SSH_KEY: ${{ secrets.SSH_KEY }}
 
 
 jobs:
@@ -21,9 +26,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Terraform Init
+      - name: Install SSH Client (For provisioning)
+        run: apk add openssh
+      - name: Install SSH Key
+        run: |
+          mkdir -p /root/.ssh
+          chown root /root/.ssh
+          echo $SSH_KEY > /root/.ssh/id_rsa
+          chmod 600 /root/.ssh/id_rsa 
+      - name: Init Terraform plugins 
         run: terraform init
-      - name: Terraform Apply
+      - name: Validate terraform files
+        run: terraform validate
+      - name: Apply terraform files
         run: terraform apply -auto-approve
       
       

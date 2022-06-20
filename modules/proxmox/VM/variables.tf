@@ -9,7 +9,9 @@ variable "Memory"{default = "1024"}
 variable "diskSize" {default = "10G"}
 variable "networkIp" {}
 variable "networkGateway" {default = "192.168.1.1"}
-
+variable "networkDhcp" {default = true}
+variable "dataFile" {default = ""}
+variable "pool" {default = ""}
 
 
 
