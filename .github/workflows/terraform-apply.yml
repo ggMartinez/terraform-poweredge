@@ -14,10 +14,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Terraform Plan
-        run: |
-          terraform init
-          terraform apply -auto-approve
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
       
       
       
