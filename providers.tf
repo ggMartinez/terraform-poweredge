@@ -8,6 +8,7 @@ terraform {
 }
 
 provider "proxmox" {
+  alias = "server"
   pm_api_url = var.proxmoxUrl
   pm_api_token_id = var.proxmoxToken
   pm_api_token_secret = var.proxmoxSecret
