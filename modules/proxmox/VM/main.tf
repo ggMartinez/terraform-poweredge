@@ -16,7 +16,7 @@ provider "proxmox" {
 
 
 resource "proxmox_vm_qemu" "proxmox-vm" {
-  count = var.count
+  count = var.vmCount
   name = "${var.name}-${count.index + 1}" 
   target_node = var.proxmoxHost
   clone = var.templateName
