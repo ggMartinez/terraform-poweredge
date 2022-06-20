@@ -14,10 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Terraform Plan
-        run: terraform init
-        run: terraform plan
+        run: |
+          terraform init
+          terraform plan
 
       - uses: actions/checkout@v2
         name: Terraform Apply
-        run: terraform init
-        run: terraform apply -auto-aprove
+        run: |
+          terraform init
+          terraform apply -auto-aprove
