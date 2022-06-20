@@ -1,4 +1,5 @@
 variable "sshKey" {}
+variable "name" {}
 variable "vmCount" {default = 1}
 variable "proxmoxHost" {default = "prosmos"}
 variable "templateName" {default = "centos7-template"}
