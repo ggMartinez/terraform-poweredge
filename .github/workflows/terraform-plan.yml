@@ -11,7 +11,7 @@ jobs:
   TerraformPlan:
     runs-on: [self-hosted]
     container:
-      image: hashicorp/terraform
+      image: yogeek/terraform-jq
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
