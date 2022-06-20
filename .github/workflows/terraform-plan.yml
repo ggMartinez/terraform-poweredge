@@ -36,7 +36,7 @@ jobs:
           apk add gettext
           cat backend.tf.example | envsubst | tee backend.tf
       - name: Init Terraform plugins 
-        run: terraform init -
+        run: terraform init
       - name: Validate terraform files
         run: terraform validate
       - name: Show terraform Plan
