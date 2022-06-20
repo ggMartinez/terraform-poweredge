@@ -10,3 +10,6 @@ provider "consul" {
     lock     = true
     gzip     = false
 }
+
+variable "consul_address" {}
+variable "consul_path" {}

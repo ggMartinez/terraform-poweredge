@@ -11,7 +11,8 @@ on:
     workflow_dispatch:
 
 env:
-  TF_VAR_address: 192.168.1.4:8500
+  TF_VAR_consul_address: 192.168.1.4:8500
+  TF_VAR_consul_path: terraform/terraform.tfstate
   PM_API_URL: https://192.168.1.4:8006/api2/json
   PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
