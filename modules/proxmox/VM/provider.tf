@@ -7,7 +7,10 @@ terraform {
 
     proxmox-pools = {
       source = "blz-ea/proxmox"
-      version = "0.3.3"
     }
   }
 }
+
+provider "proxmox-pools" {
+  virtual_environment {}
+}   
