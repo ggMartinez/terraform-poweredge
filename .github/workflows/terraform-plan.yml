@@ -11,9 +11,9 @@ on:
     workflow_dispatch:
 
 env:
-  TF_VAR_proxmoxUrl: https://192.168.1.4:8006/api2/json
-  TF_VAR_proxmoxToken: root@pam!terraform
-  TF_VAR_proxmoxSecret: fdd0f2a1-6cf4-41a2-ba0a-c4f8ea251a6f
+  PM_API_URL: https://192.168.1.4:8006/api2/json
+  PM_API_TOKEN_ID: root@pam!terraform
+  PM_API_TOKEN_SECRET: fdd0f2a1-6cf4-41a2-ba0a-c4f8ea251a6f
 
 jobs:
   TerraformPlan:
