@@ -11,8 +11,8 @@ on:
     workflow_dispatch:
 
 env:
-  TF_VAR_consul_address: 192.168.1.4:8500
-  TF_VAR_consul_path: terraform/terraform.tfstate
+  CONSUL_ADDRESS: 192.168.1.4:8500
+  CONSUL_PATH: terraform/terraform.tfstate
   PM_API_URL: https://192.168.1.4:8006/api2/json
   PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
@@ -31,6 +31,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Export variables
+        run: |
+          export TF_VAR_consul_address=$CONSUL_ADDRESS
+          export TF_VAR_consul_path=$CONSUL_PATH
       - name: Init Terraform plugins 
         run: terraform init
       - name: Validate terraform files
