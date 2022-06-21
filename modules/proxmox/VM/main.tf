@@ -1,5 +1,5 @@
 resource "null_resource" "user-data"{
-  count = var.dataFile != "" ? var.vmCount : 0
+  count = var.runState != "apply" ? 0 : var.dataFile != "" ? var.vmCount : 0
   connection {
     type        = "ssh"
     user        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_user
@@ -13,8 +13,9 @@ resource "null_resource" "user-data"{
   }
 }
 
-resource "proxmox_virtual_environment_pool" "operations_pool" {
-  comment = "Managed by Terraform"
+resource "proxmox_virtual_environment_pool" "vm_pool" {
+  count = var.pool != "" ? 0 : 1 
+  comment = "Pool for ${var.pool}"
   pool_id = var.pool != "" ? var.pool : var.name 
   provider = proxmox-pools
 }
@@ -27,7 +28,7 @@ resource "proxmox_vm_qemu" "proxmox-vm" {
   target_node = var.proxmoxHost
   clone = var.templateName
   agent = 1
-  pool = proxmox_virtual_environment_pool.operations_pool.pool_id
+  pool = var.pool != "" ? var.pool : proxmox_virtual_environment_pool.vm_pool[0].pool_id
   os_type = "cloud-init"
   cores = var.cpuCores
   sockets = var.cpuSockets
