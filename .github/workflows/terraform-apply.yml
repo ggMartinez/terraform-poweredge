@@ -33,6 +33,7 @@ jobs:
       - name: Validate terraform files
         run: terraform validate
   Plan:
+    needs: Validate
     runs-on: [self-hosted]
     container:
       image: centos:7
@@ -44,6 +45,7 @@ jobs:
       - name: Show Terraform plan
         run: terraform plan
   Apply:
+    needs: Plan
     runs-on: [self-hosted]
     container:
       image: centos:7
