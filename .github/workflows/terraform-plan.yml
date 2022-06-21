@@ -43,6 +43,8 @@ jobs:
           chmod +x /bin/terraform
       - name: Create Consul Backend config
         run:  cat backend.tf.example | envsubst | tee backend.tf
+      - name: Create Dummy SSH Key File # TODO: This sucks
+        run:  touch /tmp/id_rsa 
       - name: Init Terraform plugins 
         run: terraform init
       - name: Validate terraform files
