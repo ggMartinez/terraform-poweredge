@@ -47,7 +47,7 @@ jobs:
       - name: Validate terraform files
         run: terraform validate
       - name: Apply terraform files
-        run: terraform apply -auto-approve -var="runState=apply"
+        run: terraform apply -auto-approve
       - name: Delete SSH Key for Provisioning
         run: rm -f /tmp/id_rsa
       
