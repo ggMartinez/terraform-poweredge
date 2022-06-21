@@ -4,5 +4,6 @@ runs:
   using: "composite"
   steps:
     - name: Install yum packages
+      shell: bash
       run: yum install -y openssh-clients wget gettext unzip
    

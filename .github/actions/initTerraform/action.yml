@@ -4,11 +4,14 @@ runs:
   using: "composite"
   steps:
     - name: Install SSH Key for Provisioning
+      shell: bash
       run: |
         echo $TERRAFORM_SSH_KEY | base64 -d > /tmp/id_rsa
         chmod 600 /tmp/id_rsa 
     - name: Create Consul Backend config
+      shell: bash
       run:  cat backend.tf.example | envsubst | tee backend.tf
-    - name: Init Terraform plugins 
+    - name: Init Terraform plugins
+      shell: bash
       run: terraform init
    

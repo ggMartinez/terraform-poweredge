@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: Install yum packages
+      shell: bash
       run: |
           wget $TERRAFORM_DOWNLOAD_URL -O terraform.zip
           unzip terraform.zip
