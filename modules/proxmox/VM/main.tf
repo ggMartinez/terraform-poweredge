@@ -5,6 +5,7 @@ resource "null_resource" "user-data"{
     user        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_user
     host        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_host
     port        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_port
+    private_key = "${file("/tmp/id_rsa")}"
   }
   
   provisioner "remote-exec" {
