@@ -10,7 +10,7 @@ module "proxmox-vm" {
   name = "Dockers"
   dataFile = "${path.module}/userData.sh"
 }
- module "proxmox-vm-2"{
+ module "proxmox-vm2"{
   source = "../../modules/proxmox/VM"
   sshKey = var.sshKey
   networkIp = "192.168.1.42"
