@@ -28,16 +28,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Install Packages
-        uses: ./.github/actions/installBasePackages
-      - name: Install Terraform
-        uses: ./.github/actions/installTerraform
       - name: Initialize terraform
         uses: ./.github/actions/initTerraform 
       - name: Validate terraform files
         run: terraform validate
-      - name: Apply terraform files
-        run: terraform apply -auto-approve
   Plan:
     runs-on: [self-hosted]
     container:
@@ -45,13 +39,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Install Packages
-        uses: ./.github/actions/installBasePackages
-      - name: Install Terraform
-        uses: ./.github/actions/installTerraform
       - name: Initialize terraform
         uses: ./.github/actions/initTerraform 
-
       - name: Show Terraform plan
         run: terraform plan
   Apply:
@@ -61,10 +50,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Install Packages
-        uses: ./.github/actions/installBasePackages
-      - name: Install Terraform
-        uses: ./.github/actions/installTerraform
       - name: Initialize terraform
         uses: ./.github/actions/initTerraform 
       - name: Apply Terraform configuration

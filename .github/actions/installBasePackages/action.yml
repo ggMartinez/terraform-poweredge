@@ -1,9 +1,0 @@
-name: "Install base packages"
-description: "Install base packages for all jobs"
-runs:
-  using: "composite"
-  steps:
-    - name: Install yum packages
-      shell: bash
-      run: yum install -y openssh-clients wget gettext unzip
-   
