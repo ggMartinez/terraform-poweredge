@@ -21,7 +21,7 @@ env:
   
 
 jobs:
-  TerraformApply:
+  Validate:
     runs-on: [self-hosted]
     container:
       image: centos:7
@@ -29,26 +29,46 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Install Packages
-        run: yum install -y openssh-clients wget gettext unzip 
+        uses: ./.github/actions/installBasePackages
       - name: Install Terraform
-        run: |
-          wget $TERRAFORM_DOWNLOAD_URL -O terraform.zip
-          unzip terraform.zip
-          mv terraform /bin
-          chmod +x /bin/terraform
-      - name: Install SSH Key for Provisioning
-        run: |
-          echo $TERRAFORM_SSH_KEY | base64 -d > /tmp/id_rsa
-          chmod 600 /tmp/id_rsa 
-      - name: Create Consul Backend config
-        run:  cat backend.tf.example | envsubst | tee backend.tf
-      - name: Init Terraform plugins 
-        run: terraform init
+        uses: ./.github/actions/installTerraform
+      - name: Initialize terraform
+        uses: ./.github/actions/initTerraform 
       - name: Validate terraform files
         run: terraform validate
       - name: Apply terraform files
         run: terraform apply -auto-approve
-      - name: Delete SSH Key for Provisioning
-        run: rm -f /tmp/id_rsa
+  Plan:
+    runs-on: [self-hosted]
+    container:
+      image: centos:7
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Install Packages
+        uses: ./.github/actions/installBasePackages
+      - name: Install Terraform
+        uses: ./.github/actions/installTerraform
+      - name: Initialize terraform
+        uses: ./.github/actions/initTerraform 
+
+      - name: Show Terraform plan
+        run: terraform plan
+  Apply:
+    runs-on: [self-hosted]
+    container:
+      image: centos:7
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Install Packages
+        uses: ./.github/actions/installBasePackages
+      - name: Install Terraform
+        uses: ./.github/actions/installTerraform
+      - name: Initialize terraform
+        uses: ./.github/actions/initTerraform 
+      - name: Apply Terraform configuration
+        run: terraform apply -auto-approve
+
       
       

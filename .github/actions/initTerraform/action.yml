@@ -1,0 +1,14 @@
+name: "Init Terraform"
+description: "Initialize all components for run terraform"
+runs:
+  using: "composite"
+  steps:
+    - name: Install SSH Key for Provisioning
+      run: |
+        echo $TERRAFORM_SSH_KEY | base64 -d > /tmp/id_rsa
+        chmod 600 /tmp/id_rsa 
+    - name: Create Consul Backend config
+      run:  cat backend.tf.example | envsubst | tee backend.tf
+    - name: Init Terraform plugins 
+      run: terraform init
+   
