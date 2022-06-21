@@ -11,7 +11,7 @@ variable "networkIp" {default = null}
 variable "networkGateway" {default = "192.168.1.1"}
 variable "networkDhcp" {default = true}
 variable "dataFile" {default = ""}
-variable "pool" {default = null}
+variable "pool" {default = ""}
 variable "runState" {default = ""}
 
 
