@@ -1,6 +1,5 @@
 #!/bin/bash
-{ setenforce 0 
-yum install -y docker 
-service docker start
-chkconfig docker on
-} > /tmp/init.log 2> /tmp/error.log
+sudo setenforce 0 
+sudo yum install -y docker 
+sudo service docker start
+sudo chkconfig docker on
