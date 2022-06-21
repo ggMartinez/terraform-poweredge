@@ -1,5 +1,5 @@
 resource "null_resource" "user-data"{
-  count = var.dataFile != "" ? 1 : 0
+  count = var.dataFile != "" ? var.vmCount : 0
   connection {
     type        = "ssh"
     user        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_user

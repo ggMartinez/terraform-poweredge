@@ -41,12 +41,6 @@ jobs:
           unzip terraform.zip
           mv terraform /bin
           chmod +x /bin/terraform
-      - name: Install SSH Key
-        run: |
-          mkdir -p /root/.ssh
-          chown root /root/.ssh
-          echo $TERRAFORM_SSH_KEY | base64 -d > /root/.ssh/id_rsa
-          chmod 600 /root/.ssh/id_rsa 
       - name: Create Consul Backend config
         run:  cat backend.tf.example | envsubst | tee backend.tf
       - name: Init Terraform plugins 
