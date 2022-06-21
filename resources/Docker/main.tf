@@ -1,5 +1,5 @@
  module "proxmox-vm"{
-  source = "../../modules/proxmox/VM"
+  source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
   sshKey = var.sshKey
   networkDhcp = true
   name = "DockerTest"
