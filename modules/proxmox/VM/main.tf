@@ -38,7 +38,7 @@ ${var.sshKey}
 
 
 resource "null_resource" "user-data"{
-  count = var.runState != "apply" ? 0 : var.dataFile != "" ? var.vmCount : 0
+  count = var.dataFile != "" ? var.vmCount : 0
   connection {
     type        = "ssh"
     user        = proxmox_vm_qemu.proxmox-vm[count.index].ssh_user
