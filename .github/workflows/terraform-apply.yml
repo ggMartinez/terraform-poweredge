@@ -25,7 +25,6 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: centos:7
-    environment: production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -38,7 +37,6 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: centos:7
-    environment: production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -67,7 +65,7 @@ jobs:
         with:
           name: terraformPlan
       - name: Apply Terraform configuration
-        run: terraform apply plan -auto-approve
+        run: terraform apply plan 
 
 
       
