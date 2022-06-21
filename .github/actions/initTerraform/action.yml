@@ -5,7 +5,7 @@ runs:
   steps:
     - name: Install yum packages
       shell: bash
-      run: yum install -y openssh-clients wget gettext unzip
+      run: yum install -y openssh-clients wget gettext unzip git
     - name: Install SSH Key for Provisioning
       shell: bash
       run: |
