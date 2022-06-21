@@ -25,6 +25,7 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: centos:7
+    environment: production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -37,25 +38,37 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: centos:7
+    environment: production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Initialize terraform
         uses: ./.github/actions/initTerraform 
       - name: Show Terraform plan
-        run: terraform plan
+        run: terraform plan -out plan
+      - name: Save plan file
+        uses: actions/upload-artifact@v2
+        with:
+          name: terraformPlan
+          path: plan
   Apply:
     needs: Plan
     runs-on: [self-hosted]
     container:
       image: centos:7
+    environment: production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Initialize terraform
         uses: ./.github/actions/initTerraform 
+      - name: Download plan file 
+        uses: actions/download-artifact@v2
+        with:
+          name: terraformPlan
       - name: Apply Terraform configuration
-        run: terraform apply -auto-approve
+        run: terraform apply plan -auto-approve
+
 
       
       
