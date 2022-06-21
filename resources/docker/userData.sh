@@ -1,3 +1,6 @@
 #!/bin/bash
-
-echo "Hola" > /tmp/hola.txt
+setenforce 0
+sysconfig firewalld off
+yum install -y docker 
+service docker start
+chkconfig docker on
