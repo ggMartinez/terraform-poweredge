@@ -20,7 +20,7 @@ resource "proxmox_vm_qemu" "proxmox-vm" {
   target_node = var.proxmoxHost
   clone = var.templateName
   agent = 1
-  pool = var.pool 
+  pool = var.pool ? var.pool : "VMs" 
   os_type = "cloud-init"
   cores = var.cpuCores
   sockets = var.cpuSockets
