@@ -10,11 +10,12 @@ on:
       - "main"
     workflow_dispatch:
 
+
 env:
   TERRAFORM_DOWNLOAD_URL: https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
   TERRAFORM_SSH_KEY: ${{ secrets.SSH_KEY }}
   CONSUL_ADDRESS: 192.168.1.4:8500
-  CONSUL_PATH: state/terraform.tfstate
+  CONSUL_PATH: state/terra.tfstate
   PM_API_URL: https://192.168.1.4:8006/api2/json
   PM_USER: root@pam 
   PM_PASS: ${{ secrets.PM_PASS }}
@@ -26,29 +27,28 @@ env:
   
 
 jobs:
-  TerraformPlan:
+  Validate:
     runs-on: [self-hosted]
     container:
       image: centos:7
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Install Packages
-        run: yum install -y openssh-clients wget gettext unzip 
-      - name: Install Terraform
-        run: |
-          wget $TERRAFORM_DOWNLOAD_URL -O terraform.zip
-          unzip terraform.zip
-          mv terraform /bin
-          chmod +x /bin/terraform
-      - name: Create Consul Backend config
-        run:  cat backend.tf.example | envsubst | tee backend.tf
-      - name: Create Dummy SSH Key File # TODO: This sucks
-        run:  touch /tmp/id_rsa 
-      - name: Init Terraform plugins 
-        run: terraform init
+      - name: Initialize terraform
+        uses: ./.github/actions/initTerraform 
       - name: Validate terraform files
         run: terraform validate
-      - name: Show terraform Plan
-        run: terraform plan
+  Plan:
+    needs: Validate
+    runs-on: [self-hosted]
+    container:
+      image: centos:7
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Initialize terraform
+        uses: ./.github/actions/initTerraform 
+      - name: Show Terraform plan
+        run: terraform plan -out plan
+      
       
