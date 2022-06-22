@@ -1,7 +1,7 @@
  module "kubernetes-pool"{
   source = "github.com/ggMartinez/terraform-proxmox-modules//Pool"
-  id = K8s
-  comment = "Kubernetes"
+  id = "K8s"
+  comment = "Kubernetes Cluster"
 }
 
 
