@@ -1,4 +1,6 @@
 #!/bin/bash
+yum=$(ps aux | grep yum | tr -s " " | cut -d" " -f2)
+sudo kill -9 $yum
 sudo setenforce 0 
 sudo yum install -y docker 
 sudo service docker start
