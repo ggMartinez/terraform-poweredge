@@ -6,7 +6,6 @@ on:
       - main
 
 env:
-  TERRAFORM_DOWNLOAD_URL: https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
   TERRAFORM_SSH_KEY: ${{ secrets.SSH_KEY }}
   CONSUL_ADDRESS: 192.168.1.4:8500
   CONSUL_PATH: state/terra.tfstate
@@ -24,7 +23,7 @@ jobs:
   Validate:
     runs-on: [self-hosted]
     container:
-      image: centos:7
+      image: ggmartinez/terraform:1.2.3
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -36,7 +35,7 @@ jobs:
     needs: Validate
     runs-on: [self-hosted]
     container:
-      image: centos:7
+      image: ggmartinez/terraform:1.2.3
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -53,7 +52,7 @@ jobs:
     needs: Plan
     runs-on: [self-hosted]
     container:
-      image: centos:7
+      image: ggmartinez/terraform:1.2.3
     environment: production
     steps:
       - name: Checkout Repository
