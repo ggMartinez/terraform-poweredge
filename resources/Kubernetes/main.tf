@@ -10,6 +10,8 @@
   sshKey = var.sshKey
   networkDhcp = false 
   networkIp = "192.168.1.50"
+  cpuCores = "2"
+  memory = "2048"
   name = "DockerTest"
   pool = module.kubernetes-pool.id
   dataFile = "${path.module}/userData.sh"
