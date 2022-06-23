@@ -14,7 +14,7 @@
   Memory = "2048"
   name = "Rancher"
   pool = module.kubernetes-pool.id
-  dataFile = "${path.module}/userData.sh"
+  dataFile = "${path.module}/scripts/rancher.sh"
 }
 
 #  module "k8s-master"{
@@ -26,7 +26,7 @@
 #   Memory = "2048"
 #   name = "K8sMaster"
 #   pool = module.kubernetes-pool.id
-#   dataFile = "${path.module}/userDataMasters.sh"
+#   dataFile = "${path.module}/scripts/k8sMasters.sh"
 # }
 
 
@@ -41,7 +41,7 @@
 #   Memory = "2048"
 #   name = "K8sWorker"
 #   pool = module.kubernetes-pool.id
-#   dataFile = "${path.module}/userData.sh"
+#   dataFile = "${path.module}/scripts/k8sWorkers.sh"
 # }
 
 
