@@ -8,6 +8,7 @@ sudo chkconfig docker on
 
 sudo docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
+  --name Rancher \
   --privileged \
   rancher/rancher:latest
 
