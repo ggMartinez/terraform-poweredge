@@ -11,7 +11,7 @@
   networkDhcp = false 
   networkIp = "192.168.1.50"
   cpuCores = "2"
-  memory = "2048"
+  Memory = "2048"
   name = "Rancher"
   pool = module.kubernetes-pool.id
   dataFile = "${path.module}/userData.sh"
