@@ -37,7 +37,7 @@
   networkDhcp = false 
   networkIp = "192.168.1.6"
   cpuCores = "2"
-  count = 3
+  vmCount = 3
   Memory = "2048"
   name = "Rancher"
   pool = module.kubernetes-pool.id
