@@ -1,6 +1,12 @@
 #!/bin/bash
-yum=$(ps aux | grep yum | grep upgrade | tr -s " " | cut -d" " -f2)
-sudo kill -9 $yum
+
+sudo kill -9 $(cat /var/run/yum.pid)
+while [ $? -ne 0 ]
+do
+  sudo kill -9 $(cat /var/run/yum.pid)
+done
+
+sudo hostnamectl set-hostname "k8s-master-worker"
 sudo setenforce 0 
 sudo yum install -y docker 
 sudo service docker start
