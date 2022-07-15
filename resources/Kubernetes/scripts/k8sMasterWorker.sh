@@ -19,3 +19,4 @@ sudo chkconfig docker on
 
 echo "UseDNS no" >> /etc/ssh/sshd_config
 sudo service sshd restart
+
