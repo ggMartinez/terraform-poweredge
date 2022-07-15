@@ -2,18 +2,17 @@
 
 sudo setenforce 0 
 
-sudo cat << EOF > /etc/yum.repos.d/rancher.repo 
+sudo bash -c 'cat << EOF > /etc/yum.repos.d/rancher.repo 
 [rancher] 
 name=Rancher 
 baseurl=https://rpm.rancher.io/rancher/production/centos/7/noarch
 enabled=1 
 gpgcheck=1 
 gpgkey=https://rpm.rancher.io/public.key 
-EOF
+EOF'
 
-sudo kill -9 $(cat /var/run/yum.pid)
-sudo killall yum
-sudo rm -f /var/run/yum.pid
+yumpid=$(ps aux | grep yum| grep -v grep| grep upgrade| tr -s " "| cut -d" " -f 2)
+sudo kill -9 $yumpid
 
 sudo yum install -y rancher-selinux vim docker 
 sudo echo '{"group":"dockerroot"}' > /etc/docker/daemon.json
