@@ -4,7 +4,7 @@
   comment = "Kubernetes Cluster"
 }
 
- module "k8s-master-vm"{
+ module "k8s-masters-vm"{
   source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
   sshKey = var.sshKey
   vmCount = 3
@@ -18,7 +18,7 @@
 }
 
 
- module "k8s-master-vm"{
+ module "k8s-workers-vm"{
   source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
   sshKey = var.sshKey
   vmCount = 3
