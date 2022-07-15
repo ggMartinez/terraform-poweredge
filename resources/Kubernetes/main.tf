@@ -16,32 +16,3 @@
   pool = module.kubernetes-pool.id
   dataFile = "${path.module}/userData.sh"
 }
-
- module "k8s-master"{
-  source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
-  sshKey = var.sshKey
-  networkDhcp = false 
-  networkIp = "192.168.1.51"
-  cpuCores = "2"
-  Memory = "2048"
-  name = "Rancher"
-  pool = module.kubernetes-pool.id
-  dataFile = "${path.module}/userDataMasters.sh"
-}
-
-
-
- module "k8s-workers"{
-  source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
-  sshKey = var.sshKey
-  networkDhcp = false 
-  networkIp = "192.168.1.6"
-  cpuCores = "2"
-  count = 3
-  Memory = "2048"
-  name = "Rancher"
-  pool = module.kubernetes-pool.id
-  dataFile = "${path.module}/userData.sh"
-}
-
-
