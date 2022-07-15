@@ -30,7 +30,7 @@ jobs:
   Validate:
     runs-on: [self-hosted]
     container:
-      image: centos:7
+      image: ggmartinez/terraform:1.2.3
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -42,7 +42,7 @@ jobs:
     needs: Validate
     runs-on: [self-hosted]
     container:
-      image: centos:7
+      image: ggmartinez/terraform:1.2.3
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2

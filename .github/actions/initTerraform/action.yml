@@ -3,9 +3,6 @@ description: "Initialize all components for run terraform"
 runs:
   using: "composite"
   steps:
-    - name: Install yum packages
-      shell: bash
-      run: yum install -y openssh-clients wget gettext unzip git
     - name: Install SSH Key for Provisioning
       shell: bash
       run: |
@@ -14,13 +11,6 @@ runs:
     - name: Create Consul Backend config
       shell: bash
       run:  cat backend.tf.example | envsubst | tee backend.tf
-    - name: Install yum packages
-      shell: bash
-      run: |
-          wget $TERRAFORM_DOWNLOAD_URL -O terraform.zip
-          unzip terraform.zip
-          mv terraform /bin
-          chmod +x /bin/terraform
     - name: Init Terraform plugins
       shell: bash
       run: terraform init

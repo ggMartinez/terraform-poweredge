@@ -14,5 +14,5 @@
   Memory = "2048"
   name = "Rancher"
   pool = module.kubernetes-pool.id
-  dataFile = "${path.module}/userData.sh"
+  dataFile = "${path.module}/scripts/rancher.sh"
 }
