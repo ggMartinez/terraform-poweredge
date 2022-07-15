@@ -23,7 +23,7 @@
   sshKey = var.sshKey
   vmCount = 3
   networkDhcp = false 
-  networkIp = "192.168.1.5"
+  networkIp = "192.168.1.6"
   cpuCores = "2"
   Memory = "2048"
   name = "K8sWorker"
