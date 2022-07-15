@@ -26,7 +26,7 @@
   networkIp = "192.168.1.5"
   cpuCores = "2"
   Memory = "2048"
-  name = "K8sMaster"
+  name = "K8sWorker"
   pool = module.kubernetes-pool.id
   dataFile = "${path.module}/scripts/k8sMasterWorker.sh"
 }
