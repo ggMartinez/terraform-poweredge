@@ -17,6 +17,7 @@ env:
   PROXMOX_VE_PASSWORD: ${{ secrets.PM_PASS }}
   PROXMOX_VE_ENDPOINT: https://192.168.1.4:8006/
   PROXMOX_VE_INSECURE: 1
+  SSL_CERT_DIR: "/etc/ssl/certs"
   
 
 jobs:
