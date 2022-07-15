@@ -4,28 +4,29 @@
   comment = "Kubernetes Cluster"
 }
 
-
- module "rancher-vm"{
+ module "k8s-master-vm"{
   source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
   sshKey = var.sshKey
+  vmCount = 3
   networkDhcp = false 
-  networkIp = "192.168.1.50"
+  networkIp = "192.168.1.5"
+  cpuCores = "1"
+  Memory = "1024"
+  name = "K8sMaster"
+  pool = module.kubernetes-pool.id
+  dataFile = "${path.module}/scripts/k8sMasterWorker.sh"
+}
+
+
+ module "k8s-master-vm"{
+  source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
+  sshKey = var.sshKey
+  vmCount = 3
+  networkDhcp = false 
+  networkIp = "192.168.1.5"
   cpuCores = "2"
   Memory = "2048"
-  name = "Rancher"
+  name = "K8sMaster"
   pool = module.kubernetes-pool.id
-  dataFile = "${path.module}/scripts/rancher.sh"
+  dataFile = "${path.module}/scripts/k8sMasterWorker.sh"
 }
-
- module "k8s-master-worker-vm"{
-  source = "github.com/ggMartinez/terraform-proxmox-modules//VM"
-  sshKey = var.sshKey
-  networkDhcp = false 
-  networkIp = "192.168.1.51"
-  cpuCores = "2"
-  Memory = "4096"
-  name = "K8sMasterWorker"
-  pool = module.kubernetes-pool.id
-  dataFile = "${path.module}/scripts/rancher.sh"
-}
-
